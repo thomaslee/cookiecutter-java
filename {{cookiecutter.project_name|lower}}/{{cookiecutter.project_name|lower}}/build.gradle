@@ -1,0 +1,21 @@
+// vim: ft=groovy:sw=4:ts=4:expandtab
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+buildscript {
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
+    }
+}
+
+dependencies {
+    // compile "org.eclipse.jetty:jetty-servlet:${project['jetty.version']}"
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': '{{cookiecutter.java_package_base}}.{{cookiecutter.project_name|lower}}.Main'
+    }
+    classifier = null
+}
+
