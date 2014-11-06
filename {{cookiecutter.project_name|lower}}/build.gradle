@@ -20,6 +20,8 @@ allprojects {
 }
 
 subprojects {
+    // sourceCompatibility = '1.8'
+    // targetCompatibility = '1.8'
     dependencies {
         compile "org.slf4j:slf4j-api:${project['slf4j.version']}"
         runtime "org.slf4j:slf4j-log4j12:${project['slf4j.version']}"
@@ -35,6 +37,6 @@ subprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
+    gradleVersion = '2.1'
 }
 
