@@ -1,0 +1,13 @@
+# NAME={{cookiecutter.project_name|lower}}
+JAVA="/opt/jdk/current/bin/java"
+PIDFILE=/opt/$NAME/shared/tmp/${NAME}.pid
+USER=vagrant
+GROUP=vagrant
+
+APPDIR="/opt/$NAME/current"
+CONFDIR="$APPDIR/conf"
+LOGDIR="$APPDIR/log"
+
+JAVA_OPTS="-Xmx512m -Xms512m -XX:+AggressiveOpts"
+JAVA_OPTS="$JAVA_OPTS -Dlog4j.configuration=file://$CONFDIR/log4j.properties"
+JAVA_OPTS="$JAVA_OPTS -Dapp.dir=$APPDIR -Dconf.dir=$CONFDIR -Dlog.dir=$LOGDIR"

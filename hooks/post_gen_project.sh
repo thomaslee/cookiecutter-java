@@ -10,6 +10,7 @@ MAINDIR="$PROJECT_NAME/src/main/java/$JAVA_PACKAGE_BASE/$PROJECT_NAME"
 mkdir -p "$MAINDIR"
 mv "Main.java" "$MAINDIR"
 mv "ApplicationModule.java" "$MAINDIR"
+mv "HelloWorldService.java" "$MAINDIR"
 
 git init
 git config user.name "{{cookiecutter.full_name}}"
@@ -19,4 +20,7 @@ git commit -a -m "Initial import"
 
 gradle wrapper
 ./gradlew idea
+
+# vagrant up
+# ./gradlew deploy -Phost=development
 

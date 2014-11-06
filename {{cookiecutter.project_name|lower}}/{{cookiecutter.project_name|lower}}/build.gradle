@@ -6,7 +6,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 buildscript {
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.1.1'
-        classpath 'org.hidetake:gradle-ssh-plugin:0.4.3-tgl' // hack custom build for Java 8
+        classpath 'org.hidetake:gradle-ssh-plugin:0.4.3'
     }
 }
 
@@ -42,10 +42,13 @@ task deploy(dependsOn: 'shadowJar') << {
             execute "[ -d ${destDir} ] || mkdir -p ${destDir}"
             put shadowJar.outputs.files[0], "${destDir}/${project.name}.jar"
             put file("init.sh"), destDir
+            put file("conf"), destDir
             execute "chmod 755 ${destDir}/init.sh"
             execute "[ ! -x /etc/init.d/${project.name} ] || /etc/init.d/${project.name} stop"
             execute "rm -f /opt/${project.name}/current || true"
             execute "ln -s ${destDir} /opt/${project.name}/current"
+            execute "ln -s /opt/${project.name}/shared/log /opt/${project.name}/current/log"
+            execute "ln -s /opt/${project.name}/shared/data /opt/${project.name}/current/data"
             execute "/etc/init.d/${project.name} start"
         }
     }

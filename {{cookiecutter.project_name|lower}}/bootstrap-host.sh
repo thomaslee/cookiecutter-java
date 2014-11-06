@@ -8,11 +8,10 @@ bootstrap_primary() {
     install_default_jdk
 
     mkdir -p "/opt/$PROJECT_NAME/builds"
-    mkdir -p "/opt/$PROJECT_NAME/shared/bin"
+    # mkdir -p "/opt/$PROJECT_NAME/shared/bin"
     mkdir -p "/opt/$PROJECT_NAME/shared/log"
     mkdir -p "/opt/$PROJECT_NAME/shared/data"
     mkdir -p "/opt/$PROJECT_NAME/shared/tmp"
-    cp /vagrant/default.sh /opt/$PROJECT_NAME/shared/default
     chown -R "$SSH_USER:$SSH_GROUP" "/opt/$PROJECT_NAME"
     # symlink target is created by deploy
     ln -s "/opt/$PROJECT_NAME/current/init.sh" "/etc/init.d/$PROJECT_NAME"
