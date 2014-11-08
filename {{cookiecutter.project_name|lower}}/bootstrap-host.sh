@@ -5,6 +5,8 @@ set -ex
 JAVA_VERSION=8u25
 
 bootstrap_primary() {
+    apt_get_update
+    install_perf_tools
     install_default_jdk
 
     mkdir -p "/opt/$PROJECT_NAME/builds"
@@ -15,6 +17,17 @@ bootstrap_primary() {
     chown -R "$SSH_USER:$SSH_GROUP" "/opt/$PROJECT_NAME"
     # symlink target is created by deploy
     ln -s "/opt/$PROJECT_NAME/current/init.sh" "/etc/init.d/$PROJECT_NAME"
+
+    # FIXME this is broken because the init script symlink won't be valid here
+    # update-rc.d -f $PROJECT_NAME defaults
+}
+
+apt_get_update() {
+    apt-get update
+}
+
+install_perf_tools() {
+    apt-get install linux-tools dstat pstack tcpdump atop htop strace -y
 }
 
 install_default_jdk() {
