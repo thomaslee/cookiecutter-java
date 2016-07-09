@@ -4,4 +4,6 @@ JAVA_OPTS=()
 JAVA_OPTS+=("-Dapp.bin.dir=${BINDIR}")
 JAVA_OPTS+=("-Dapp.conf.dir=${CONFDIR}")
 JAVA_OPTS+=("-Dapp.log.dir=${LOGDIR}")
+JAVA_OPTS+=("-Dapp.log.level=info")
+JAVA_OPTS+=("-Dlogback.configurationFile=${CONFDIR}/logback.xml")
 

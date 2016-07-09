@@ -1,6 +1,5 @@
 #!/bin/bash
 
-JAVA_OPTS=()
 JAVA_OPTS+=("-Xms256m" "-Xmx256m")
 JAVA_OPTS+=("-XX:+UseParallelOldGC")
 JAVA_OPTS+=("-XX:NewRatio=1")
