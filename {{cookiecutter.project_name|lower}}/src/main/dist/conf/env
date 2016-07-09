@@ -1,0 +1,7 @@
+#!/bin/bash
+
+JAVA_OPTS=()
+JAVA_OPTS+=("-Dapp.bin.dir=${BINDIR}")
+JAVA_OPTS+=("-Dapp.conf.dir=${CONFDIR}")
+JAVA_OPTS+=("-Dapp.log.dir=${LOGDIR}")
+

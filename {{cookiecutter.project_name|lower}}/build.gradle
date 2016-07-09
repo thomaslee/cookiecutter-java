@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id 'distribution'
 }
 
 repositories {
@@ -14,9 +15,29 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.0.38-beta'
 }
 
+jar.enabled = false
+
 shadowJar {
+    classifier = ''
+    version = ''
     manifest {
         attributes 'Main-Class': '{{cookiecutter.package}}.Main'
+    }
+}
+
+distTar {
+    compression = 'bzip2'
+    extension = 'tar.bz2'
+}
+
+distributions {
+    main {
+        contents {
+            from("${projectDir}/src/main/dist")
+            into("bin") {
+                from shadowJar
+            }
+        }
     }
 }
 

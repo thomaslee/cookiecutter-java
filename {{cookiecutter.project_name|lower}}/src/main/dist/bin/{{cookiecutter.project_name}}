@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [[ "$DEBUG" == "yes" ]]; then
+    set -x
+fi
+
+set -e
+
+if [[ -z "$ENVIRONMENT" ]]; then
+    ENVIRONMENT="development"
+fi
+
+NAME="{{cookiecutter.project_name}}"
+
+BINDIR="$(dirname "$0")"
+BINDIR="$(cd "$BINDIR" && pwd)"
+APPDIR="${BINDIR}/.."
+APPDIR="$(cd "$APPDIR" && pwd)"
+CONFDIR="$APPDIR/conf"
+ENVCONFDIR="$CONFDIR/${ENVIRONMENT}"
+LOGDIR="$APPDIR/log"
+
+CREATE_LOG_DIR=yes
+
+if [[ -f "${CONFDIR}/env" ]]; then
+    . "${CONFDIR}/env"
+fi
+
+if [[ -f "${ENVCONFDIR}/env" ]]; then
+    . "${ENVCONFDIR}/env"
+fi
+
+if [[ "$CREATE_LOG_DIR" == "yes" ]]; then
+    if [[ ! -d "$LOGDIR" ]]; then
+        mkdir -p "$LOGDIR"
+    fi
+fi
+
+
+if [[ -z "$JAVA" ]]; then
+    if [[ -n "$JAVA_HOME" ]]; then
+        JAVA="$JAVA_HOME/bin/java"
+    else
+        JAVA="$(which java 2>/dev/null)"
+        if [[ -z "$JAVA" ]]; then
+            echo "error: java binary not found on \$PATH" >&2
+            exit 1
+        fi
+    fi
+fi
+
+if [[ ! -x "$JAVA" ]]; then
+    echo "error: cannot execute java binary: ${JAVA}" >&2
+    exit 1
+fi
+
+exec "$JAVA" "${JAVA_OPTS[@]}" -jar "$BINDIR/${NAME}.jar" "$@"
+
