@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<configuration>
+<configuration debug="false" scan="false">
     <jmxConfigurator />
-    <shutdownHook />
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook" />
 
     <appender name="rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${app.log.dir}/{{cookiecutter.project_name}}.log</file>

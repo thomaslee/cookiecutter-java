@@ -4,6 +4,7 @@
     "package_dir": "{{cookiecutter.package|replace('.', '/')}}",
     "version": "0.0.1-SNAPSHOT",
     "java_version": "1.8",
+    "use_git": true,
     "_copy_without_render": [
         "*.jar",
         "gradlew",

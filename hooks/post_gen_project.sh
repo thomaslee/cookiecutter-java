@@ -10,3 +10,9 @@ set -x
 set +x
 echo "Everything looks good."
 
+if [[ "{{cookiecutter.use_git}}" == "True" ]]; then
+    git init
+    git add .
+    git commit -a -m "Initial import"
+fi
+
