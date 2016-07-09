@@ -1,4 +1,0 @@
-include '{{cookiecutter.project_name|lower}}'
-
-rootProject.name = '{{cookiecutter.project_name|lower}}-parent'
-
