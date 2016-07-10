@@ -15,7 +15,7 @@ else
     echo "Everything looks good."
 fi
 
-if [[ "{{cookiecutter.use_git}}" == "True" ]]; then
+if [[ "{{cookiecutter.version_control}}" == "git" ]]; then
     set +x
     echo "Initializing git repo"
 
