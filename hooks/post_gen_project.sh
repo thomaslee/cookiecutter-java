@@ -11,8 +11,16 @@ set +x
 echo "Everything looks good."
 
 if [[ "{{cookiecutter.use_git}}" == "True" ]]; then
-    git init
-    git add .
-    git commit -a -m "Initial import"
+    if [[ -z "$GIT" ]]; then
+        GIT="$(which git)"
+    fi
+
+    if [[ ! -z "$GIT" && -x "$GIT" ]]; then
+        "$GIT" init
+        "$GIT" add .
+        "$GIT" commit -a -m "Initial import"
+    else
+        echo "WARNING: git requested, but git binary not found" >&2
+    fi
 fi
 
