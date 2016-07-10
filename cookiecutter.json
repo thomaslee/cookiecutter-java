@@ -1,6 +1,6 @@
 {
     "project_name": "",
-    "package": "co.tomlee.{{cookiecutter.project_name|replace('-', '')|replace('_', '')}}",
+    "package": "co.tomlee.{{cookiecutter.project_name|lower|replace('-', '')|replace('_', '')}}",
     "package_dir": "{{cookiecutter.package|replace('.', '/')}}",
     "version": "0.0.1-SNAPSHOT",
     "java_version": "1.8",
