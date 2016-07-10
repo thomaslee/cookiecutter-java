@@ -1,6 +1,10 @@
 plugins {
     id 'java'
     id 'distribution'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'findbugs'
+    id 'pmd'
 
     id 'com.github.johnrengelman.shadow' version '1.2.3'
     id 'me.champeau.gradle.jmh' version '0.3.0'
@@ -38,6 +42,41 @@ shadowJar {
     version = ''
     manifest {
         attributes 'Main-Class': '{{cookiecutter.package}}.Main'
+    }
+}
+
+checkstyle {
+    configFile = file("checkstyle.xml")
+    ignoreFailures = false
+    toolVersion = '7.0'
+    sourceSets = [sourceSets.main]
+}
+
+findbugs {
+    toolVersion = '3.0.1'
+    sourceSets = [sourceSets.main]
+    ignoreFailures = false
+    reportLevel = 'medium'
+}
+
+pmd {
+    ignoreFailures = false
+    ruleSetFiles = files("pmd-rulesets.xml")
+    sourceSets = [sourceSets.main]
+    toolVersion = '5.5.0'
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
     }
 }
 
