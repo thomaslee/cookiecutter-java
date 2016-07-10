@@ -22,14 +22,18 @@ configurations.all {
     exclude module: 'slf4j-log4j12'
 }
 
+ext {
+    slf4jVersion = '1.7.21'
+}
+
 dependencies {
     compile 'com.google.guava:guava:19.0'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
 
     runtime 'ch.qos.logback:logback-classic:1.1.7'
-    runtime 'org.slf4j:log4j-over-slf4j:1.7.21'
-    runtime 'org.slf4j:jcl-over-slf4j:1.7.21'
+    runtime "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+    runtime "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
