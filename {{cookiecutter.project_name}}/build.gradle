@@ -8,6 +8,8 @@ plugins {
 
     id 'com.github.johnrengelman.shadow' version '1.2.3'
     id 'me.champeau.gradle.jmh' version '0.3.0'
+    id 'com.palantir.jacoco-coverage' version '0.4.0'
+    id 'com.palantir.jacoco-full-report' version '0.4.0'
 }
 
 repositories {
@@ -65,6 +67,13 @@ pmd {
     sourceSets = [sourceSets.main]
     toolVersion = '5.5.0'
 }
+
+jacocoCoverage {
+    fileThreshold 0.8
+    fileThreshold 0.0, 'Main.java'
+}
+
+check.dependsOn 'checkCoverage'
 
 tasks.withType(Checkstyle) {
     reports {
