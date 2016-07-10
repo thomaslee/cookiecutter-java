@@ -1,7 +1,9 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '1.2.3'
     id 'distribution'
+
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
+    id 'me.champeau.gradle.jmh' version '0.3.0'
 }
 
 repositories {
@@ -29,7 +31,6 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.0.38-beta'
 }
 
-jar.enabled = false
 uploadArchives.enabled = false
 
 shadowJar {
@@ -55,4 +56,9 @@ distributions {
         }
     }
 }
+
+// jmh {
+//     profilers = ['perfasm']
+//     timeUnit = 'us'
+// }
 
