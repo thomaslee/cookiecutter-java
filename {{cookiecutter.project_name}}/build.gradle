@@ -37,7 +37,10 @@ dependencies {
     testCompile 'org.mockito:mockito-core:2.0.38-beta'
 }
 
-uploadArchives.enabled = false
+jacocoCoverage {
+    fileThreshold 0.8
+    fileThreshold 0.0, 'Main.java'
+}
 
 shadowJar {
     classifier = ''
@@ -68,13 +71,6 @@ pmd {
     toolVersion = '5.5.0'
 }
 
-jacocoCoverage {
-    fileThreshold 0.8
-    fileThreshold 0.0, 'Main.java'
-}
-
-check.dependsOn 'checkCoverage'
-
 tasks.withType(Checkstyle) {
     reports {
         xml.enabled false
@@ -104,6 +100,10 @@ distributions {
         }
     }
 }
+
+check.dependsOn 'checkCoverage'
+
+uploadArchives.enabled = false
 
 // jmh {
 //     profilers = ['perfasm']
